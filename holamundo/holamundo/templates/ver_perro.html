@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+        <div class="card">
+                <div class="card-header">
+
+                        <h5 class="card-title">{{ perro.nombre }}</h5>
+        
+                </div>
+                {% if perro.foto %}
+                <img src="{{ perro.foto.url }}" class="card-img-top mb-3" alt="{{ perro.nombre }}" style="max-height: 400px; object-fit: cover;">
+                {% endif %}
+                <p class="card-text">{{ perro.descripcion }}</p>
+                <p class="card-text"><strong>Sexo:</strong> {{ perro.get_sexo_display }}</p>
+                <p class="card-text"><strong>Esterilizado:</strong> {{ perro.get_esterilizado_display }}</p>
+                <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ perro.fecha_nacimiento|date:"d/m/Y" }}</p>
+                <p class="card-text"><strong>Edad:</strong> {{ perro.edad }}</p>
+                <p class="card-text"><strong>Refugio Actual:</strong> </p>
+
+
+</div>
+</div>
+        
+{% endblock %}
