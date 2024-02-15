@@ -6,7 +6,7 @@ from .models import Refugio, Perro, AtencionesClinica, Vacuna, Persona, Interesa
 
 @admin.register(Refugio)
 class RefugioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre', 'direccion', 'descripcion', 'ciudad')
+    list_display = ('id', 'es_activo', 'nombre', 'direccion', 'descripcion', 'ciudad')
 
 
 @admin.register(Perro)

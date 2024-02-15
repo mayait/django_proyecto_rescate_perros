@@ -23,6 +23,17 @@ class Refugio(models.Model):
         verbose_name='fecha de actualización',
         help_text='Fecha de la última actualización del registro.'
     )
+    es_activo = models.BooleanField(blank=False, 
+                                    null=False, 
+                                    default=True, 
+                                    verbose_name='¿Propiedad activa?')
+    
+    documento = models.FileField(
+        upload_to="documentos/", 
+        blank=True, 
+        verbose_name='documentos del refugio',
+        help_text='Documento del refugio'
+    )
 
     def __str__(self) -> str:
         return f'{self.pk} - {self.nombre}'
@@ -35,6 +46,10 @@ class Refugio(models.Model):
     
     def get_delete_url(self):
         return reverse('eliminar_refugio', kwargs={'codigo_refugio': self.id})
+    
+    def cantidad_perros(self):
+        return self.perros.count()
+
 
 SEXO_CHOICES = [
     ('M', 'Macho'),

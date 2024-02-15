@@ -4,5 +4,5 @@ from .models import *
 class RefugioForm(forms.ModelForm):
     class Meta:
         model = Refugio
-        fields = ['nombre', 'direccion', 'descripcion', 'ciudad', 'tipo']
+        fields = ['nombre', 'direccion', 'descripcion', 'ciudad', 'tipo', 'documento']
         

@@ -55,7 +55,8 @@ def editar_refugio(request, codigo_refugio):
 def eliminar_refugio(request, codigo_refugio):
     c = {}
     c['refugio'] =  get_object_or_404(Refugio, pk=codigo_refugio)
-    c['refugio'].delete()
+    c['refugio'].es_activo = False
+    c['refugio'].save()
     return redirect('lista_refugios')
 
 
@@ -66,7 +67,7 @@ def ver_refugio(request, codigo_refugio):
 
 def lista_refugios(request):
     c = {}
-    c['refugios'] = Refugio.objects.all()
+    c['refugios'] = Refugio.objects.filter(es_activo=True)
     return render(request, 'lista_refugios.html', c)
 
 

@@ -8,6 +8,7 @@
             {% for r in refugios %}
             <li class="list-group-item">
                 <a href="{{r.get_absolute_url}}">{{ r.nombre }}</a> 
+                {{ r.cantidad_perros }} perros
             </li>
             {% empty %}
             <li class="list-group-item">No hay refugios.</li>
