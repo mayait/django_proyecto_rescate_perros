@@ -5,8 +5,8 @@
 
 <div class="container mt-3">
         <h1>Nuevo {{titulo}}</h1>
-
-                <form action="" method="post">
+                <form method="post" enctype="multipart/form-data">
+                        
                         {% csrf_token %}
 
                         {% for field in form %}

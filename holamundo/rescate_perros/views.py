@@ -35,21 +35,16 @@ def nuevo_refugio(request):
 
 def editar_refugio(request, codigo_refugio):
     c = {}
-    c['refugio'] =  get_object_or_404(Refugio, pk=codigo_refugio)
+    refugio = get_object_or_404(Refugio, pk=codigo_refugio)
     if request.method == 'POST':
-        c['form'] = RefugioForm(
-                        request.POST or None,
-                        request.FILES or None,
-                        )
-        if c['form'].is_valid():
-            c['form'].save()
-            return redirect(c['form'].instance.get_absolute_url())
-        
-    c['form'] = RefugioForm(
-        request.POST or None,
-        request.FILES or None,
-        instance = c['refugio']
-    )
+        form = RefugioForm(request.POST, request.FILES, instance=refugio)
+        if form.is_valid():
+            form.save()
+            return redirect(refugio.get_absolute_url())
+    else:
+        form = RefugioForm(instance=refugio)
+    c['form'] = form
+    c['refugio']= refugio
     return render(request, 'formulario_refugio.html', c)
 
 def eliminar_refugio(request, codigo_refugio):
