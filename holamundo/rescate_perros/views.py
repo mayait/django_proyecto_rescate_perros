@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
 # Create your views here.
@@ -7,9 +7,69 @@ from rest_framework.response import Response
 
 from rest_framework import serializers
 
+# importar formularios
+from .forms import RefugioForm
+
 
 # Importar modelos
 from .models import Perro, Refugio
+
+def nuevo_refugio(request):
+    contenido = {}
+    if request.method == 'POST':
+        contenido['form'] = RefugioForm(
+                        request.POST or None,
+                        request.FILES or None,
+                        )
+        if contenido['form'].is_valid():
+            contenido['form'].save()
+            return redirect(contenido['form'].instance.get_absolute_url())
+        
+    contenido['instancia_refugio'] = Refugio()
+    contenido['form'] = RefugioForm(
+        request.POST or None,
+        request.FILES or None,
+        instance = contenido['instancia_refugio']
+    )
+    return render(request, 'formulario_refugio.html', contenido)
+
+def editar_refugio(request, codigo_refugio):
+    c = {}
+    c['refugio'] =  get_object_or_404(Refugio, pk=codigo_refugio)
+    if request.method == 'POST':
+        c['form'] = RefugioForm(
+                        request.POST or None,
+                        request.FILES or None,
+                        )
+        if c['form'].is_valid():
+            c['form'].save()
+            return redirect(c['form'].instance.get_absolute_url())
+        
+    c['form'] = RefugioForm(
+        request.POST or None,
+        request.FILES or None,
+        instance = c['refugio']
+    )
+    return render(request, 'formulario_refugio.html', c)
+
+def eliminar_refugio(request, codigo_refugio):
+    c = {}
+    c['refugio'] =  get_object_or_404(Refugio, pk=codigo_refugio)
+    c['refugio'].delete()
+    return redirect('lista_refugios')
+
+
+def ver_refugio(request, codigo_refugio):
+    c = {}
+    c['refugio'] =  get_object_or_404(Refugio, pk=codigo_refugio)
+    return render(request, 'refugio.html', c)
+
+def lista_refugios(request):
+    c = {}
+    c['refugios'] = Refugio.objects.all()
+    return render(request, 'lista_refugios.html', c)
+
+
 
 def ver_perro(request, codigo_perro):
     

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from rescate_perros.views import holamundo, home, perros, ver_perro, lista_perros, ver_perro_api
+from rescate_perros.views import holamundo, home, perros, ver_perro, lista_perros, ver_perro_api, nuevo_refugio, ver_refugio, editar_refugio, eliminar_refugio, lista_refugios
 
 
 urlpatterns = [
@@ -27,6 +27,17 @@ urlpatterns = [
     path('lista_perros/ciudad/<str:ciudad>/', lista_perros, name='lista_perros'),
     path('perro/<int:codigo_perro>/', ver_perro, name='detalle_perro'),
     path('perro_api/<int:codigo_perro>/', ver_perro_api, name='detalle_perro_api'),
+    
+    # URLS de REFUGIOS
+    path('refugio/', lista_refugios, name='lista_refugios'),
+    path('refugio/<int:codigo_refugio>/', ver_refugio, name='ver_refugio'),
+    path('refugio/nuevo/', nuevo_refugio, name='nuevo_refugio'),
+    path('refugio/editar/<int:codigo_refugio>/', editar_refugio, name='editar_refugio'),
+    path('refugio/eliminar/<int:codigo_refugio>/', eliminar_refugio, name='eliminar_refugio'),
+
+
+
+
 
 
 ]

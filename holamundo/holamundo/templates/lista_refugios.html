@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+        <h1>Refugios</h1>
+        <ul class="list-group">
+            {% for r in refugios %}
+            <li class="list-group-item">
+                <a href="{{r.get_absolute_url}}">{{ r.nombre }}</a> 
+            </li>
+            {% empty %}
+            <li class="list-group-item">No hay refugios.</li>
+            {% endfor %}
+        </ul>
+</div>
+        
+{% endblock %}

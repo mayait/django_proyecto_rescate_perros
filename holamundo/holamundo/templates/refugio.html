@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+        <div class="card">
+                <div class="card-header">
+
+                        <h5 class="card-title">Refugio: {{ refugio.nombre }}</h5>
+        
+                </div>
+             
+                <p class="card-text">{{ refugio.descripcion }}</p>
+                <p class="card-text"><strong>Direccion:</strong> {{ refugio.direccion }}</p>
+                <p class="card-text"><strong>Ciudad:</strong> {{ refugio.ciudad }}</p>
+                <p class="card-text"><strong>Actualización:</strong> {{ refugio.fecha_actualizacion }}</p>
+                <p class="card-text"><strong>Tipo refugio:</strong> {{ refugio.tipo }}</p>
+
+           
+                
+                <a type="button" href="{{ refugio.get_delete_url }}" class="btn btn-danger">Eliminar</a>
+                <a type="button" href="{{ refugio.get_edit_url }}" class="btn btn-warning">Editar</a>
+
+</div>
+</div>
+        
+{% endblock %}

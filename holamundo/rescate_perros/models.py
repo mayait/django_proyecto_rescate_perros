@@ -1,16 +1,40 @@
 from django.db import models
 from django.utils import timezone
 from datetime import date
+from django.urls import reverse
 
+TIPO_REFUGIO_CHOICES = [
+    ('C', 'Campestre'),
+    ('U', 'Urbano'),
+]
 
 class Refugio(models.Model):
-    nombre = models.CharField(max_length=144, blank=False, null=False)
+    nombre = models.CharField(max_length=144, 
+                              blank=False, 
+                              null=False, 
+                              verbose_name='Nombre del refugio',
+                              help_text='El nombre comercial del refugio o el nombre corto')
     direccion = models.CharField(max_length=144, blank=True)
+    tipo = models.CharField(max_length=5, blank=True, choices=TIPO_REFUGIO_CHOICES)
     descripcion = models.TextField(blank=True, null=True)
     ciudad = models.CharField(max_length=144, blank=False, null=False, default='Quito')
+    fecha_actualizacion = models.DateTimeField(
+        default=timezone.now, 
+        verbose_name='fecha de actualización',
+        help_text='Fecha de la última actualización del registro.'
+    )
 
     def __str__(self) -> str:
         return f'{self.pk} - {self.nombre}'
+    
+    def get_absolute_url(self):
+        return reverse('ver_refugio', kwargs={'codigo_refugio': self.id})
+    
+    def get_edit_url(self):
+        return reverse('editar_refugio', kwargs={'codigo_refugio': self.id})
+    
+    def get_delete_url(self):
+        return reverse('eliminar_refugio', kwargs={'codigo_refugio': self.id})
 
 SEXO_CHOICES = [
     ('M', 'Macho'),

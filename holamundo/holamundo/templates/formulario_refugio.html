@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container mt-3">
+        <h1>Nuevo {{titulo}}</h1>
+
+                <form action="" method="post">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+                                 
+                                {{ field | add_class:"form-control"  }}
+                        </div>
+
+                        {% endfor %}
+                        <div class="form-group"></div>
+                        <input type="submit" class="mt-10 btn btn-primary" value="Submit">
+                        </div>
+                </form>
+</div>
+                
+                
+
+        
+{% endblock %}
