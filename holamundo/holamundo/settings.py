@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,10 +38,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    
+    # Veltrix Theme
+    'layouts',
+    'extra_pages',
+
+    "crispy_forms",
+    'crispy_bootstrap5',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'widget_tweaks',
     'imagekit',
     'rest_framework',
     'rescate_perros',
+
+
 ]
 
 MIDDLEWARE = [
@@ -50,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # Middleware de allauth añadido aquí
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -60,7 +76,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'holamundo/templates'
+            'templates'
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -134,3 +150,68 @@ NOTEBOOK_ARGUMENTS = [
     '--port', '8888',
 ]
 IPYTHON_KERNEL_DISPLAY_NAME = 'Django Kernel'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+# Otras configuraciones de allauth (opcional)
+# Puedes personalizar el comportamiento con las siguientes opciones:
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+#  All Auth Configurations
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "account_login"
+ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS =True
+
+# social Additional configuration settings
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_UNIQUE_EMAIL = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+#  All auth form customaization
+ACCOUNT_FORMS = {
+    "login": "holamundo.forms.UserLoginForm",
+    "signup": "holamundo.forms.UserRegistrationForm",
+    "change_password": "holamundo.forms.PasswordChangeForm",
+    "set_password": "holamundo.forms.PasswordSetForm",
+    "reset_password": "holamundo.forms.PasswordResetForm",
+    "reset_password_from_key": "holamundo.forms.PasswordResetKeyForm",
+    
+}
+
+# SMTP Configure
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.mailtrap.io"
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "1f37cfc80405c5"
+EMAIL_HOST_PASSWORD = "5f7e38f28ae814"
+DEFAULT_FROM_EMAIL = "1f37cfc80405c5"
+
+
+SITE_ID = 1
+
+# Provider Configurations
+SOCIALACCOUNT_PROVIDERS = {
+    
+}
+
+# client id = '556542475411-atai04oepna72lf526enbkq3b5d6sod1.apps.googleusercontent.com'
+# client secret = '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'
