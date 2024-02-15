@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hola/', holamundo, name='holamundo'),
     path('', home, name='home'),
+    path('', home, name='dashboard'),
     path('lista_perros/ciudad/<str:ciudad>/', lista_perros, name='lista_perros'),
     path('perro/<int:codigo_perro>/', ver_perro, name='detalle_perro'),
     path('perro_api/<int:codigo_perro>/', ver_perro_api, name='detalle_perro_api'),

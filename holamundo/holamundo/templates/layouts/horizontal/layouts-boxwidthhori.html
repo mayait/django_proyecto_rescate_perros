@@ -1,0 +1,37 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+    <link href="{% static 'libs/chartist/dist/chartist.min.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+    <body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
+{% endblock %}
+
+{% block header %}
+{% include 'partials/hori-header.html' %}
+{% endblock %}
+{% block sidebar %}
+{% include 'partials/hori-sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block extra_javascript %}
+
+    <!-- Peity chart-->
+    <script src="{% static 'libs/peity/jquery.peity.min.js' %}"></script>
+
+    <!-- Plugin Js-->
+    <script src="{% static 'libs/chartist/dist/chartist.min.js' %}"></script>
+    <script src="{% static 'libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+
+    <script src="{% static 'js/pages/dashboard.init.js' %}"></script>
+
+{% endblock %}
