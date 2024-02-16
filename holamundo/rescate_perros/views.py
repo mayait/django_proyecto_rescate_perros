@@ -7,6 +7,8 @@ from rest_framework.response import Response
 
 from rest_framework import serializers
 
+from django.contrib.auth.decorators import login_required
+
 # importar formularios
 from .forms import RefugioForm
 
@@ -33,6 +35,7 @@ def nuevo_refugio(request):
     )
     return render(request, 'formulario_refugio.html', contenido)
 
+@login_required
 def editar_refugio(request, codigo_refugio):
     c = {}
     refugio = get_object_or_404(Refugio, pk=codigo_refugio)

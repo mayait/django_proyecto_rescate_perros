@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -37,6 +37,8 @@ urlpatterns = [
     path('refugio/nuevo/', nuevo_refugio, name='nuevo_refugio'),
     path('refugio/editar/<int:codigo_refugio>/', editar_refugio, name='editar_refugio'),
     path('refugio/eliminar/<int:codigo_refugio>/', eliminar_refugio, name='eliminar_refugio'),
+
+    path('accounts/', include('allauth.urls')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
