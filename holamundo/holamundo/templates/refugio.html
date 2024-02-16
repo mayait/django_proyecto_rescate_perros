@@ -6,12 +6,19 @@
                 <div class="card-header">
                         <h5 class="card-title">Refugio: {{ refugio.nombre }}</h5>
                 </div>
-             
+
+                {% if refugio.foto %}
+                <img src="{{refugio.foto.url}}" width="200px">
+                {% endif %}
                 <p class="card-text">{{ refugio.descripcion }}</p>
                 <p class="card-text"><strong>Direccion:</strong> {{ refugio.direccion }}</p>
                 <p class="card-text"><strong>Ciudad:</strong> {{ refugio.ciudad }}</p>
                 <p class="card-text"><strong>Actualización:</strong> {{ refugio.fecha_actualizacion }}</p>
                 <p class="card-text"><strong>Tipo refugio:</strong> {{ refugio.tipo }}</p>
+
+                <p class="card-text"><a href="{{ refugio.documento.url }}">Descargar documento:</a> 
+                        {{ refugio.documento.url }}
+                </p>
 
            
                 

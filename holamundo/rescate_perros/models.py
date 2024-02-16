@@ -29,10 +29,18 @@ class Refugio(models.Model):
                                     verbose_name='¿Propiedad activa?')
     
     documento = models.FileField(
-        upload_to="documentos/", 
+        upload_to="documentos_refugio/", 
         blank=True, 
         verbose_name='documentos del refugio',
         help_text='Documento del refugio'
+    )
+    foto = models.ImageField(
+        upload_to="foto_refugio/", 
+        blank=True, 
+        null=True, 
+        verbose_name='foto',
+        help_text='Foto del refugio.',
+
     )
 
     def __str__(self) -> str:
@@ -90,7 +98,7 @@ class Perro(models.Model):
         help_text='Indica si el perro está esterilizado.'
     )
     ficha_perro = models.FileField(
-        upload_to="uploads/", 
+        upload_to="media/ficha_perro/", 
         blank=True, 
         verbose_name='ficha del perro',
         help_text='Ficha médica del perro.'
@@ -115,7 +123,7 @@ class Perro(models.Model):
         help_text='Refugio en el que se encuentra actualmente el perro.'
     )
     foto = models.ImageField(
-        upload_to="media/", 
+        upload_to="media/foto_perro/", 
         blank=True, 
         null=True, 
         verbose_name='foto',
