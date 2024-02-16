@@ -10,11 +10,30 @@ from rest_framework import serializers
 from django.contrib.auth.decorators import login_required
 
 # importar formularios
-from .forms import RefugioForm
+from .forms import RefugioForm, Perfil_Usuario_Form
 
 
 # Importar modelos
-from .models import Perro, Refugio
+from .models import Perro, Refugio, Perfil_Usuario
+
+@login_required
+def ver_perfil_usuario(request):
+    c = {}
+    if hasattr(request.user, 'perfil'):
+        perfil = request.user.perfil
+    else:
+        perfil = Perfil_Usuario(user=request.user)
+    if request.method == 'POST':
+        form = Perfil_Usuario_Form(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
+    else:
+        form = Perfil_Usuario_Form(instance=perfil)
+    c['form'] = form
+    c['refugio']= perfil
+
+    return render(request, 'perfil_usuario.html', c)
+
 
 def nuevo_refugio(request):
     contenido = {}
@@ -136,6 +155,10 @@ def holamundo(request):
     return Response(perros)
 
 def home(request):
+    if hasattr(request.user, 'perfil'):
+        perfil = request.user.perfil
+        return redirect('ver_perfil_usuario')
+    
     template = 'index.html'
     c = {
         'titulo': 'ESTA ES TU CASA',

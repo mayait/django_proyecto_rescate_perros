@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Refugio, Perro, AtencionesClinica, Vacuna, Persona, InteresadosEnRescatar
+from .models import Perfil_Usuario, Refugio, Perro, AtencionesClinica, Vacuna, Persona, InteresadosEnRescatar
 
+
+@admin.register(Perfil_Usuario)
+class Perfil_UsuarioAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'celular', 'ubicacion', 'foto_usuario')
+    list_filter = ('user',)
 
 @admin.register(Refugio)
 class RefugioAdmin(admin.ModelAdmin):

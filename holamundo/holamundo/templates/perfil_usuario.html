@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="container mt-4">
+        <div class="card">
+                <div class="card-header">
+                        <h5 class="card-title">Perfil de: {{request.user}}</h5>
+                </div>
+
+                {% if request.user.perfil.foto_usuario %}
+
+                <img src="{{request.user.perfil.foto_usuario.url}}" alt="" width="150px">
+                
+                {% endif %}
+
+
+                <form method="post" enctype="multipart/form-data">
+                        
+                        {% csrf_token %}
+
+                        {% for field in form %}
+
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+                                 
+                                {{ field | add_class:"form-control"  }}
+                        </div>
+
+                        {% endfor %}
+                        <div class="form-group"></div>
+                        <input type="submit" class="mt-10 btn btn-primary" value="Submit" class="btn btn-success">
+                        </div>
+                </form>
+
+                {% comment %}
+                {% if request.user.is_authenticated %}
+                <a type="button" href="{{ refugio.get_delete_url }}" class="btn btn-danger">Eliminar</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                <a type="button" href="{{ refugio.get_edit_url }}" class="btn btn-warning">Editar</a>
+                <a type="button" href="/accounts/logout/" class="btn btn-success">Logout</a>
+                {% else %}
+                <a type="button" href="/accounts/login/?next={{ refugio.get_absolute_url }}" class="btn btn-success">Login para editar</a>
+                
+                {% endif %}
+                {% endcomment %}
+
+                
+
+</div>
+</div>
+        
+{% endblock %}

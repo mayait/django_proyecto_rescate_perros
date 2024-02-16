@@ -20,12 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-from rescate_perros.views import holamundo, home, perros, ver_perro, lista_perros, ver_perro_api, nuevo_refugio, ver_refugio, editar_refugio, eliminar_refugio, lista_refugios
+from rescate_perros.views import holamundo, home, perros, ver_perfil_usuario, ver_perro, lista_perros, ver_perro_api, nuevo_refugio, ver_refugio, editar_refugio, eliminar_refugio, lista_refugios
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hola/', holamundo, name='holamundo'),
+    path('mi_perfil/', ver_perfil_usuario, name='ver_perfil_usuario'),
+    path('accounts/profile/', ver_perfil_usuario, name='profile'),
     path('', home, name='home'),
     path('lista_perros/ciudad/<str:ciudad>/', lista_perros, name='lista_perros'),
     path('perro/<int:codigo_perro>/', ver_perro, name='detalle_perro'),

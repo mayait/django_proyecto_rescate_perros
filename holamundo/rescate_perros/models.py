@@ -3,6 +3,20 @@ from django.utils import timezone
 from datetime import date
 from django.urls import reverse
 
+from django.contrib.auth.models import User
+
+
+class Perfil_Usuario(models.Model):
+    user = models.OneToOneField(User, related_name='perfil', on_delete=models.CASCADE, null=True)
+    celular = models.CharField(blank=True, null=True, max_length=255)
+    ubicacion = models.CharField(blank=True, null=True, max_length=255)
+    foto_usuario = models.FileField(
+        upload_to="foto_usuario/", 
+        blank=True, 
+    )
+
+
+
 TIPO_REFUGIO_CHOICES = [
     ('C', 'Campestre'),
     ('U', 'Urbano'),
