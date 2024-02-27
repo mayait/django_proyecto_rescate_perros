@@ -117,6 +117,7 @@ class Perro(models.Model):
         verbose_name='fecha de actualización',
         help_text='Fecha de la última actualización del registro.'
     )
+    
     refugio_actual = models.ForeignKey(
         'Refugio', 
         related_name='perros', 
