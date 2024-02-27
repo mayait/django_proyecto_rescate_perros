@@ -60,18 +60,6 @@ json5 @ file:///home/conda/feedstock_root/build_artifacts/json5_1688248289187/wo
 jsonpointer @ file:///Users/runner/miniforge3/conda-bld/jsonpointer_1695397322962/work
 jsonschema==4.21.1
 jsonschema-specifications==2023.12.1
-jupyter @ file:///home/conda/feedstock_root/build_artifacts/jupyter_1696255489086/work
-jupyter-console @ file:///home/conda/feedstock_root/build_artifacts/jupyter_console_1678118109161/work
-jupyter-events @ file:///home/conda/feedstock_root/build_artifacts/jupyter_events_1699285872613/work
-jupyter-lsp==2.2.2
-jupyter_client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1699283905679/work
-jupyter_core==5.7.1
-jupyter_server==2.12.5
-jupyter_server_terminals==0.5.2
-jupyterlab==4.1.0
-jupyterlab_pygments==0.3.0
-jupyterlab_server==2.25.2
-jupyterlab_widgets==3.0.10
 MarkupSafe==2.1.5
 matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1660814786464/work
 mistune @ file:///home/conda/feedstock_root/build_artifacts/mistune_1698947099619/work
@@ -80,8 +68,6 @@ nbconvert==7.16.0
 nbformat @ file:///home/conda/feedstock_root/build_artifacts/nbformat_1690814868471/work
 nest-asyncio==1.6.0
 nltk==3.8.1
-notebook==7.0.7
-notebook_shim @ file:///home/conda/feedstock_root/build_artifacts/notebook-shim_1682360583588/work
 numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1695291061432/work/dist/numpy-1.26.0-cp39-cp39-macosx_11_0_arm64.whl#sha256=ff9dc9f169db024af6610041dc703f83f93303cf0d7bfa2f145374c0e1a85bc7
 oauthlib==3.2.2
 openpyxl==3.1.2
