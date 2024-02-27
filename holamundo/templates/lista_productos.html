@@ -1,0 +1,50 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+
+{% block extra_css %} 
+{% endblock %} 
+
+{% block body %} 
+{% endblock %} 
+
+{% block content %} 
+
+<div class="container mt-3">
+    <h2>Lista de Productos</h2>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-6 mb-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">Categoría: {{ product.category.name }}</p>
+                        <!-- Asegúrate de ajustar la URL según tu archivo urls.py -->
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page=1" class="btn btn-outline-info">&laquo; primera</a>
+                <a href="?page={{ products.previous_page_number }}" class="btn btn-outline-info">anterior</a>
+            {% endif %}
+            
+            <span class="current">
+                Página {{ products.number }} de {{ products.paginator.num_pages }}.
+            </span>
+            
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}" class="btn btn-outline-info">siguiente</a>
+                <a href="?page={{ products.paginator.num_pages }}" class="btn btn-outline-info">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %} 
+{% block extra_javascript %} 
+{% endblock %}

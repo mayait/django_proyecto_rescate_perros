@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        
-    </head>
+{% extends 'partials/base.html' %} 
+{% load static %} 
 
-    <body>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% block extra_css %} 
+{% endblock %} 
 
-        <h1> {{titulo}} </h1>
+{% block body %} 
+{% endblock %} 
+
+{% block content %} 
+
+        <h1> {{titulo}}  </h1>
         <p> {{mensaje}} </p>
         <p> 
+            <p>¿tiene_postulante? {{tiene_postulante}}</p>
+            <p>tiene_personal? {{tiene_personal}}</p>
+            <p>ID_POSTULANTE? {{request.user.postulante.pk}}</p>
+            <p>ID_PERSONAL? {{request.user.personal.pk}}</p>
+            <p>ID_USER? {{request.user.pk}}</p>
         
         <table class="table">
             <thead>
@@ -33,7 +39,13 @@
         {% endfor %}
     </tbody>
         </p>
+        <p>Contar palabras
+        {{contar_frecuencia_palabras}}
+    </p>
 
-    </body>
+    <h2>{{texto_traducido}}</h2>
 
-</html>
+    
+{% endblock %} 
+{% block extra_javascript %} 
+{% endblock %}

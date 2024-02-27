@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from rescate_perros.views import holamundo, home, perros, ver_perro, lista_perros, ver_perro_api, nuevo_refugio, ver_refugio, editar_refugio, eliminar_refugio, lista_refugios
-
+from rescate_perros.views import *
 
 urlpatterns = [
 
+    
+    path('import_excel/', import_excel_view, name='import_excel'),
     path('accounts/', include('allauth.urls')),
 
 
@@ -44,6 +45,12 @@ urlpatterns = [
     path("extra_pages/", include("extra_pages.urls")),
     # layouts
     path("layouts/", include("layouts.urls")),  
+
+    # Productos
+    path('products/', product_list, name='product_list'),
+    path('products/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+
+
  
 
 

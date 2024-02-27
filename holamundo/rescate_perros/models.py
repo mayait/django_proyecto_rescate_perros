@@ -2,6 +2,17 @@ from django.db import models
 from django.utils import timezone
 from datetime import date
 from django.urls import reverse
+from django.contrib.auth.models import User
+
+
+class Postulante(models.Model):
+    user = models.OneToOneField(User, related_name='postulante', on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
+
+class Personal(models.Model):
+    user = models.OneToOneField(User, related_name='personal', on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
+
 
 TIPO_REFUGIO_CHOICES = [
     ('C', 'Campestre'),
@@ -200,3 +211,66 @@ class InteresadosEnRescatar(models.Model):
 
     def __str__(self):
         return f"{self.persona.nombre} interesado en {self.perro.nombre}"
+
+
+
+######
+# SUPERSTORE
+    
+class Country(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    name = models.CharField(max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    state = models.CharField(max_length=100)
+    postal_code = models.IntegerField()
+
+    class Meta:
+        unique_together = ('name', 'country', 'state', 'postal_code')
+
+    def __str__(self):
+        return f"{self.name}, {self.state}, {self.country.name}"
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    sub_category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} - {self.sub_category}"
+
+class Product(models.Model):
+    product_id = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+class Order(models.Model):
+    order_id = models.CharField(max_length=20)
+    order_date = models.DateField()
+    ship_date = models.DateField()
+    ship_mode = models.CharField(max_length=50)
+    customer_id = models.CharField(max_length=20)
+    customer_name = models.CharField(max_length=100)
+    segment = models.CharField(max_length=50)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    region = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.order_id
+    
+class OrderLine(models.Model):
+    order = models.ForeignKey(Order, related_name='order_lines', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sales = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    discount = models.DecimalField(max_digits=5, decimal_places=2)
+    profit = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.order.order_id} - {self.product.name}"

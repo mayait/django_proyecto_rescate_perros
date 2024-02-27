@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+
+{% block extra_css %} 
+{% endblock %} 
+
+{% block body %} 
+{% endblock %} 
+
+{% block content %} 
+
+<div class="container mt-4">
+    <h1>Detalle del Producto</h1>
+    <div class="card">
+        <div class="card-header">
+            Producto: {{ product.name }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Categoría: {{ product.category.name }}</h5>
+            <!-- Suponiendo que existe un campo 'description' en tu modelo de Product -->
+            <p class="card-text">Descripción: {{ product.description }}</p>
+            <!-- Más detalles del producto como precio, etc. -->
+            <p class="card-text">Precio: ${{ product.price }}</p>
+            <p class="card-text">Cantidad disponible: {{ product.quantity }}</p>
+            
+            <!-- Añade aquí más campos según sea necesario -->
+
+            <a href="{% url 'product_list' %}" class="btn btn-primary">Volver a la lista de productos</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 
+{% block extra_javascript %} 
+{% endblock %}

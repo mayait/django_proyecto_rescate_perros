@@ -1,18 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
+# Paginador
+from django.core.paginator import Paginator
+
+
 # Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from rest_framework import serializers
 
+from .utils import *
+
 # importar formularios
 from .forms import RefugioForm
 
 
 # Importar modelos
-from .models import Perro, Refugio
+from .models import *
 
 def nuevo_refugio(request):
     contenido = {}
@@ -63,6 +72,7 @@ def ver_refugio(request, codigo_refugio):
 def lista_refugios(request):
     c = {}
     c['refugios'] = Refugio.objects.filter(es_activo=True)
+    c['color'] = request.COOKIES.get('color', 'ninguno')
     return render(request, 'lista_refugios.html', c)
 
 
@@ -138,7 +148,19 @@ def home(request):
         'titulo': 'ESTA ES TU CASA',
         'mensaje': 'Este es un mensaje desde la vista home'
     }
-    return render(request, template, c)
+    c['contar_frecuencia_palabras'] = contar_frecuencia_palabras('Este es un mensaje de prueba para contar palabras, y otras palabras')
+    c['texto_traducido'] = traducir('Hola mundo')
+
+    if hasattr(request.user, 'postulante'):
+        c['tiene_postulante'] = True
+    if hasattr(request.user, 'personal'):
+        c['tiene_personal'] = True
+
+    response = render(request, template, c)
+    response.set_cookie('color', 'azul', max_age=90000)
+    response.set_cookie('tamanio', 'max', max_age=90000)
+
+    return response
 
 def perros(request, nombre, edad):
     template = 'perros.html'
@@ -153,3 +175,23 @@ def perros(request, nombre, edad):
     print(request.GET)
     
     return render(request, template, contenido)
+
+def import_excel_view(request):
+    import_excel_to_django()
+    return HttpResponse("Correcto!!!")
+
+
+def product_list(request):
+    products_list = Product.objects.all()
+    paginator = Paginator(products_list, 100)  # Mostrar 10 productos por página
+
+    page_number = request.GET.get('page')
+    products = paginator.get_page(page_number)
+
+    return render(request, 'lista_productos.html', {'products': products})
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail_view.html'
+    context_object_name = 'product'
