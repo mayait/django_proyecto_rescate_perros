@@ -50,7 +50,6 @@ idna==2.10
 importlib-metadata==7.0.1
 importlib-resources @ file:///home/conda/feedstock_root/build_artifacts/importlib_resources_1695414790617/work
 ipykernel==6.29.2
-ipython==8.18.1
 ipywidgets==8.1.2
 isoduration @ file:///home/conda/feedstock_root/build_artifacts/isoduration_1638811571363/work/dist
 jedi @ file:///home/conda/feedstock_root/build_artifacts/jedi_1696326070614/work
