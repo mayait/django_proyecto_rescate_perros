@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-doz02dujj0g!6lc!b1ib)ja4jxztl-5#hwgi$iym-seyc9paxn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-'julianmaya.pythonanywhere.com',
+    'julianmaya.pythonanywhere.com',
+    '127.0.0.1'
 ]
 
 
@@ -78,7 +79,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'templates'
+            'templates',
+            '/home/julianmaya/django_proyecto_rescate_perros/holamundo/templates'
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
