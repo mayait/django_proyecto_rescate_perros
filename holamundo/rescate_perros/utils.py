@@ -2,18 +2,10 @@ import pandas as pd
 from django.utils.dateparse import parse_date
 from .models import Order, OrderLine, Product, Category, City, Country
 
-import re
-import unicodedata
-import nltk
-nltk.download('stopwords')
-from nltk.corpus import stopwords
-import string
+
 
 import pandas as pd
-from collections import Counter
-from nltk.tokenize import TweetTokenizer
-from nltk.tokenize import WordPunctTokenizer 
-from nltk.tokenize import word_tokenize
+
 
 def import_excel_to_django():
     # Cargar los datos desde Excel
@@ -66,26 +58,12 @@ def import_excel_to_django():
 
 
 def contar_frecuencia_palabras(texto):
-    texto = texto.lower()
-    tokens = WordPunctTokenizer().tokenize(texto)
-    contador = Counter()
-    contador.update(tokens)
-    print(contador)
-    return dict(contador)
+    a = 1
+    return None
 
-from googletrans import Translator
-from time import sleep
+
 
 def traducir(text, dest='en', **kwargs):
-    translator = Translator()
-    result = None
-    while result == None:
-        try:
-            result = translator.translate(text,**kwargs)
-        except Exception as e:
-            print(e)
-            translator = Translator()
-            sleep(0.2)
-            pass
-    return result.text.lower()
+    a = 1
+    return text
     
